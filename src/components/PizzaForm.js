@@ -7,7 +7,9 @@ function PizzaForm({
   setSizeEdit, 
   veggie, 
   setVeggie,
-  onEditSubmit 
+  onEditSubmit,
+  disabled,
+  setDisabled
 }) {
 
   function handleEditSubmit(e){
@@ -15,11 +17,12 @@ function PizzaForm({
     const editedPizza = {
       size: sizeEdit,
       topping: toppingEdit,
-      vegetarian: veggie
+      vegetarian: veggie,
     }
     onEditSubmit(editedPizza);
     setSizeEdit("")
     setToppingEdit("")
+    setDisabled(!disabled)
   }
 
   function handleVeggieEdit(){

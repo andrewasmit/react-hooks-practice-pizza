@@ -1,7 +1,8 @@
 import React from "react";
 import Pizza from "./Pizza";
 
-function PizzaList({ pizzas, onEditClick }) {
+function PizzaList({ pizzas, onEditClick, disabled, setDisabled }) {
+
 
   const pizzasToDisplay = pizzas.map(p=>{
     return <Pizza 
@@ -11,6 +12,8 @@ function PizzaList({ pizzas, onEditClick }) {
               topping={p.topping} 
               vegetarian={p.vegetarian}
               onEditClick={onEditClick}
+              disabled={disabled}
+              setDisabled={setDisabled}
             />
   })
 

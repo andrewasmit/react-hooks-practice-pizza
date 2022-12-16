@@ -9,6 +9,8 @@ function App() {
   const [toppingEdit, setToppingEdit] = useState("")
   const [sizeEdit, setSizeEdit] = useState("")
   const [veggie, setVeggie] = useState("")
+  const [disabled, setDisabled] = useState(false)
+
 
   useEffect(()=>{ 
   fetch("http://localhost:3001/pizzas")
@@ -25,6 +27,15 @@ function handlePizzaEditClick(pizzaToEditId){
 
 function handleEditSubmit(updatedPizza){
   console.log('FORM SUBMITTED', updatedPizza);
+  fetch("http://localhost:3001/pizzas",{
+    method: "POST",
+    headers: {
+      "Content-Type" : "application/json"
+    },
+    body: JSON.stringify(updatedPizza)
+  })
+  .then(res=>res.json())
+  .then(data=>setPizzaData([...pizzaData, data]));
 }
 // console.log("In APP: ", toppingEdit);
 // console.log("In APP: ", sizeEdit);
@@ -41,10 +52,14 @@ function handleEditSubmit(updatedPizza){
           veggie={veggie}
           setVeggie={setVeggie}
           onEditSubmit={handleEditSubmit}
+          disabled={disabled} 
+          setDisabled={setDisabled}
       />
       <PizzaList 
           pizzas={pizzaData} 
           onEditClick={handlePizzaEditClick}
+          disabled={disabled} 
+          setDisabled={setDisabled}
       />
     </>
   );
